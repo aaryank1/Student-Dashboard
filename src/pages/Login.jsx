@@ -1,20 +1,42 @@
 import React, { useState } from 'react'
 import { auth } from '../config/firebase.js'
-import { signInWithEmailAndPassword } from 'firebase/auth'
+import { onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import Loader from '../components/Loader.jsx'
 
 const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
+
+  onAuthStateChanged(auth, (user) => {
+    if(user){
+      navigate('/home')
+    }
+  })
 
   const handleLogin = async (e) => {
     e.preventDefault()
-    await signInWithEmailAndPassword(auth, email, password)
-    navigate('/home')
+    setLoading(true)
+    try {
+      await signInWithEmailAndPassword(auth, email, password)
+      setLoading(false)
+      toast.success('Logged in successfully')
+      navigate('/home')
+    } 
+    catch (error) {
+      setLoading(false)
+      toast.error(error.message)
+    }
   }
 
-  return(
+  return loading ? (
+    <div className='flex items-center justify-center h-screen'>
+      <Loader />
+    </div>
+    ):(
     <div className='flex items-center justify-center h-screen'>
       <div className='w-96 bg-white p-6 rounded-lg border border-gray-300'>
         <h1 className='text-3xl font-semibold mb-6'>Login</h1>

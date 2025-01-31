@@ -5,30 +5,9 @@ import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 import 'react-toastify/dist/ReactToastify.css'
 
-import Sidebar from '../components/Sidebar'
-import Dashboard from '../components/Dashboard'
-
-const Home = () => {
+const Sidebar = () => {
   const navigate = useNavigate()
   const [loading, setLoading] = useState(false)
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (!user) {
-        navigate('/');
-      }
-    });
-
-    return () => unsubscribe();
-  }, [navigate]);
-
-  // onAuthStateChanged(auth, (user) => {
-  //   if (user) {
-  //     toast.success(`Welcome back`)
-  //   } else {
-  //     navigate('/')
-  //   }
-  // })
 
   const handleSignOut = async () => {
     setLoading(true)
@@ -44,11 +23,10 @@ const Home = () => {
   }
 
   return (
-    <div className='flex'>
-      <Sidebar />
-      <Dashboard />
+    <div className='flex flex-col gap-4 items-center justify-start h-screen p-6 w-full sm:w-1/3 md:w-1/4 lg:w-1/6 border-r border-gray-300'>
+      <button onClick={handleSignOut} className='text-2xl text-white font-bold border px-4 py-2 rounded-lg bg-red-500 hover:bg-red-800 cursor-pointer'>Signout</button>
     </div>
   )
 }
 
-export default Home
+export default Sidebar
