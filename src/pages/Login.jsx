@@ -50,6 +50,10 @@ const Login = () => {
             <input onChange={(e) => setPassword(e.target.value)} type='password' id='password' name='password' className='w-full border border-gray-300 rounded-lg px-3 py-2 mt-1' />
           </div>
           <button type='submit' className='w-full bg-blue-500 text-white rounded-lg px-3 py-2 mt-4 cursor-pointer hover:bg-blue-700'>Login</button>
+          
+          <div className='flex justify-center items-center mt-4'>
+            <a href="/register">New User? Create a New Account</a>
+          </div>
         </form>
       </div>
     </div>
