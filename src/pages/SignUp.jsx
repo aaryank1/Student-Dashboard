@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { auth } from '../config/firebase.js'
 import { createUserWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 const SignUp = () => {
@@ -53,7 +53,7 @@ const SignUp = () => {
           <button type='submit' className='w-full bg-blue-500 text-white rounded-lg px-3 py-2 mt-4 cursor-pointer hover:bg-blue-700'>Sign Up</button>
         
           <div className='flex justify-center items-center mt-4'>
-            <a href="/">Already a User? Try Logging In</a>
+            <Link to="/">Already a User? Try Logging In</Link>
           </div>
 
         </form>
