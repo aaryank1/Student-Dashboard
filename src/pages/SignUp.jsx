@@ -3,6 +3,7 @@ import { auth } from '../config/firebase.js'
 import { createUserWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth'
 import { useNavigate, Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import Loader from '../components/Loader.jsx'
 
 const SignUp = () => {
   const [email, setEmail] = useState('')
